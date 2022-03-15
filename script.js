@@ -6,7 +6,9 @@ const partyList = document.querySelector(".partyList");
 const itemButton = document.querySelector(".item");
 const itemList = document.querySelector(".itemList");
 const runButton = document.querySelector(".run");
+const oppObj = document.querySelector(".foe");
 
+let oppHealthBar = oppObj.children[2];
 const moveSet = [
     {
         name: "tackle",
@@ -25,6 +27,11 @@ const moveSet = [
         damage: 15,
     },
 ];
+
+let opponentHP = 40;
+let playerHP = 40;
+
+oppHealthBar.innerHTML = opponentHP;
 
 fightButton.addEventListener("click", attackMenu);
 pkmnButton.addEventListener("click", changePokemon);
@@ -57,6 +64,13 @@ function runAway() {
     alert("You can't run from a trainer battle!");
 }
 
-function doMove() {
-    console.log("it works");
+function doMove(moveEvent) {
+    var clickedMoveName = moveEvent.target.innerHTML;
+    moveSet.forEach((move) => {
+        if (move.name === clickedMoveName) {
+            var newHP = opponentHP - move.damage;
+            opponentHP = newHP;
+        }
+        oppHealthBar.innerHTML = opponentHP;
+    });
 }
