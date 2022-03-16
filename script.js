@@ -7,6 +7,7 @@ const itemButton = document.querySelector(".item");
 const itemList = document.querySelector(".itemList");
 const runButton = document.querySelector(".run");
 const oppObj = document.querySelector(".foe");
+const backButton = document.querySelector(".back");
 
 let oppHealthBar = oppObj.children[2];
 const moveSet = [
@@ -37,6 +38,21 @@ fightButton.addEventListener("click", attackMenu);
 pkmnButton.addEventListener("click", changePokemon);
 itemButton.addEventListener("click", useItem);
 runButton.addEventListener("click", runAway);
+backButton.addEventListener("click", returnToMain);
+
+function returnToMain() {
+    menu.classList.toggle("hidden");
+    if (!battleMenu.classList.contains("hidden")) {
+        battleMenu.innerHTML = "";
+        battleMenu.classList.toggle("hidden");
+    }
+    if (!partyList.classList.contains("hidden")) {
+        partyList.classList.toggle("hidden");
+    }
+    if (!itemList.classList.contains("hidden")) {
+        itemList.classList.toggle("hidden");
+    }
+}
 
 function attackMenu() {
     moveSet.forEach((move) => {
@@ -69,6 +85,9 @@ function doMove(moveEvent) {
     moveSet.forEach((move) => {
         if (move.name === clickedMoveName) {
             var newHP = opponentHP - move.damage;
+            if (newHP < 0) {
+                newHP = 0;
+            }
             opponentHP = newHP;
         }
         oppHealthBar.innerHTML = opponentHP;
