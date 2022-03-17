@@ -8,6 +8,11 @@ const itemList = document.querySelector(".itemList");
 const runButton = document.querySelector(".run");
 const oppObj = document.querySelector(".foe");
 const backButton = document.querySelector(".back");
+const playerObj = document.querySelector(".team");
+
+let playerTurn = false;
+
+let playerHeathBar = playerObj.children[3];
 
 let oppHealthBar = oppObj.children[2];
 const moveSet = [
@@ -33,6 +38,7 @@ let opponentHP = 40;
 let playerHP = 40;
 
 oppHealthBar.innerHTML = opponentHP;
+playerHeathBar.innerHTML = playerHP;
 
 fightButton.addEventListener("click", attackMenu);
 pkmnButton.addEventListener("click", changePokemon);
@@ -92,4 +98,20 @@ function doMove(moveEvent) {
         }
         oppHealthBar.innerHTML = opponentHP;
     });
+    if (opponentHP === 0) {
+        alert("Opponents pokemon has fainted!");
+    }
+    playerTurn = false;
+    returnToMain();
+}
+
+while (opponentHP > 0) {
+    if (playerTurn === false) {
+        var opponentMove = moveSet[Math.floor(Math.random() * moveSet.length)];
+        console.log(opponentMove);
+        var tempHP = playerHP - opponentMove.damage;
+        playerHP = tempHP;
+        playerHeathBar.innerHTML = playerHP;
+        break;
+    }
 }
