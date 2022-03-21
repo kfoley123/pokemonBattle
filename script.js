@@ -10,8 +10,6 @@ const oppObj = document.querySelector(".foe");
 const backButton = document.querySelector(".back");
 const playerObj = document.querySelector(".team");
 
-let playerTurn = false;
-
 let playerHeathBar = playerObj.children[3];
 
 let oppHealthBar = oppObj.children[2];
@@ -102,25 +100,22 @@ function doMove(moveEvent) {
     if (opponentHP === 0) {
         alert("Opponents pokemon has fainted!");
     }
-    playerTurn = false;
+    disableMenu(true);
+    doOppMove();
     returnToMain();
 }
 
-while (opponentHP > 0) {
-    if (playerTurn === false) {
-        var opponentMove = moveSet[Math.floor(Math.random() * moveSet.length)];
-        console.log(opponentMove);
-        var tempHP = playerHP - opponentMove.damage;
-        playerHP = tempHP;
-        playerHeathBar.innerHTML = playerHP;
-        disableMenu();
-        break;
-    } else {
-    }
+function doOppMove() {
+    var opponentMove = moveSet[Math.floor(Math.random() * moveSet.length)];
+    console.log(opponentMove);
+    var tempHP = playerHP - opponentMove.damage;
+    playerHP = tempHP;
+    playerHeathBar.innerHTML = playerHP;
+    disableMenu(false);
 }
 
-function disableMenu() {
+function disableMenu(yesNo) {
     for (var i = 0; i < menu.children.length; i++) {
-        menu.children[i].disabled = true;
+        menu.children[i].disabled = yesNo;
     }
 }
