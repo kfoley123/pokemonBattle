@@ -9,6 +9,7 @@ const runButton = document.querySelector(".run");
 const oppObj = document.querySelector(".foe");
 const backButton = document.querySelector(".back");
 const playerObj = document.querySelector(".team");
+const textBox = document.querySelector(".textBox");
 
 let playerHeathBar = playerObj.children[3];
 
@@ -87,6 +88,9 @@ function runAway() {
 
 function doMove(moveEvent) {
     var clickedMoveName = moveEvent.target.innerHTML;
+    textBox.innerHTML = `<p> Pokemon used ${clickedMoveName} </p>`;
+    textBox.classList.toggle("hidden");
+    console.log(textBox);
     moveSet.forEach((move) => {
         if (move.name === clickedMoveName) {
             var newHP = opponentHP - move.damage;
@@ -107,10 +111,17 @@ function doMove(moveEvent) {
 
 function doOppMove() {
     var opponentMove = moveSet[Math.floor(Math.random() * moveSet.length)];
+    textBox.innerHTML = `<p> Opponent used ${opponentMove.name} </p>`;
     console.log(opponentMove);
     var tempHP = playerHP - opponentMove.damage;
+    if (tempHP < 0) {
+        tempHP = 0;
+    }
     playerHP = tempHP;
     playerHeathBar.innerHTML = playerHP;
+    if (playerHP === 0) {
+        alert("Player's pokemon has fainted!");
+    }
     disableMenu(false);
 }
 
