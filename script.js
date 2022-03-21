@@ -15,6 +15,7 @@ let playerTurn = false;
 let playerHeathBar = playerObj.children[3];
 
 let oppHealthBar = oppObj.children[2];
+
 const moveSet = [
     {
         name: "tackle",
@@ -112,6 +113,14 @@ while (opponentHP > 0) {
         var tempHP = playerHP - opponentMove.damage;
         playerHP = tempHP;
         playerHeathBar.innerHTML = playerHP;
+        disableMenu();
         break;
+    } else {
+    }
+}
+
+function disableMenu() {
+    for (var i = 0; i < menu.children.length; i++) {
+        menu.children[i].disabled = true;
     }
 }
