@@ -11,9 +11,16 @@ const backButton = document.querySelector(".back");
 const playerObj = document.querySelector(".team");
 const textBox = document.querySelector(".textBox");
 
+let playerPKMN = "Sandslash";
+
+let oppPKMN = "Gengar";
+
 let playerHeathBar = playerObj.children[3];
 
 let oppHealthBar = oppObj.children[2];
+
+playerObj.children[0].innerHTML = playerPKMN;
+oppObj.children[0].innerHTML = oppPKMN;
 
 const moveSet = [
     {
@@ -88,7 +95,7 @@ function runAway() {
 
 function doMove(moveEvent) {
     var clickedMoveName = moveEvent.target.innerHTML;
-    textBox.innerHTML = `<p> Pokemon used ${clickedMoveName} </p>`;
+    textBox.innerHTML = `<p> ${playerPKMN} used ${clickedMoveName} </p>`;
     textBox.classList.toggle("hidden");
     console.log(textBox);
     moveSet.forEach((move) => {
@@ -111,7 +118,7 @@ function doMove(moveEvent) {
 
 function doOppMove() {
     var opponentMove = moveSet[Math.floor(Math.random() * moveSet.length)];
-    textBox.innerHTML = `<p> Opponent used ${opponentMove.name} </p>`;
+    textBox.innerHTML = `<p> Opponent ${oppPKMN} used ${opponentMove.name} </p>`;
     console.log(opponentMove);
     var tempHP = playerHP - opponentMove.damage;
     if (tempHP < 0) {
