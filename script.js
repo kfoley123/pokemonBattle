@@ -44,8 +44,8 @@ const moveSet = [
 let opponentHP = 40;
 let playerHP = 40;
 
-oppHealthBar.innerHTML = opponentHP;
-playerHeathBar.innerHTML = playerHP;
+oppHealthBar.innerHTML = `HP ${opponentHP}`;
+playerHeathBar.innerHTML = `HP ${playerHP}`;
 
 fightButton.addEventListener("click", attackMenu);
 pkmnButton.addEventListener("click", changePokemon);
@@ -106,8 +106,11 @@ function doMove(moveEvent) {
             }
             opponentHP = newHP;
         }
-        oppHealthBar.innerHTML = opponentHP;
+        oppHealthBar.innerHTML = `HP ${opponentHP}`;
+        oppHealthBar.classList.remove("heathBar");
+        oppHealthBar.classList.add("healthBar75");
     });
+
     if (opponentHP === 0) {
         alert("Opponents pokemon has fainted!");
     }
@@ -125,7 +128,7 @@ function doOppMove() {
         tempHP = 0;
     }
     playerHP = tempHP;
-    playerHeathBar.innerHTML = playerHP;
+    playerHeathBar.innerHTML = `HP ${playerHP}`;
     if (playerHP === 0) {
         alert("Player's pokemon has fainted!");
     }
