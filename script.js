@@ -107,6 +107,7 @@ function doMove(moveEvent) {
             opponentHP = newHP;
         }
         oppHealthBar.innerHTML = `HP ${opponentHP}`;
+        // TODO: need to check opp heath and apply correct healthbar CSS class
         oppHealthBar.classList.remove("heathBar");
         oppHealthBar.classList.add("healthBar75");
     });
